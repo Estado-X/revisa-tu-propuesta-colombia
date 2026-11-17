@@ -10,10 +10,11 @@
   var TOPE = 1000; // un número más grande casi nunca es un puntaje (suele ser un año o un valor)
 
   var RE_CELDA_NUM = new RegExp('^[(\\[]?\\s*' + ANTES + NUM + '\\s*' + UNIDAD + '?\\s*[)\\]]?$', 'i');
-  var RE_CON_UNIDAD = new RegExp('[(\\[]?\\s*' + ANTES + NUM + '\\s*' + UNIDAD + '(?![a-záéíóúñ])\\s*[)\\]]?', 'i');
+  var RE_CON_UNIDAD = new RegExp('[(\\[]?\\s*' + ANTES + NUM + '\\s*(' + UNIDAD + ')(?![a-záéíóúñ])\\s*[)\\]]?', 'i');
   var RE_AL_FINAL = new RegExp('^(.*[a-záéíóúñ)\\]].*?)[\\s:.\\-–—…(\\[]+' + NUM + '\\s*[)\\]]?\\.?$', 'i');
   var RE_NUMERACION = /^\(?(?:\d{1,2}(?:\.\d{1,2})*|[a-z]|[ivxl]{1,4})[.)]\s+|^\d{1,2}(?:\.\d{1,2})+\s+(?=[a-záéíóúñ])/i;
-  var RE_TOTAL = /^(?:puntaje\s+|puntos\s+)?(?:total|sumatoria|suma)\b/i;
+  // «Total», «Total puntos», «Puntaje total», «Puntaje máximo total», «Suma»…
+  var RE_TOTAL = /^(?:(?:puntaje|puntos)\s+)?(?:m[aá]ximo\s+)?(?:total|sumatoria|suma)\b|^(?:gran|puntaje|puntos|m[aá]ximo|suma)\b.*\btotal$/i;
 
   function aNumero(s) {
     if (typeof s === 'number') return isFinite(s) ? s : null;
@@ -46,11 +47,25 @@
   }
 
   function deTexto(t) {
-    var m = RE_CON_UNIDAD.exec(t);
-    if (m) {
+    // Se miran todas las cifras con unidad. Manda la última que diga «puntos»; un «%» solo vale
+    // como puntaje si no hay ninguna con puntos y va entre paréntesis o al final de la línea
+    // (así «al menos el 20% del valor total: 10 puntos» conserva su 20% y puntúa 10).
+    var re = new RegExp(RE_CON_UNIDAD.source, 'gi');
+    var m, conPuntos = null, conPorcentaje = null;
+    while ((m = re.exec(t)) !== null) {
       var p = aNumero(m[1]);
-      if (p !== null && p <= TOPE) return { criterio: limpiarNombre(t.slice(0, m.index) + ' ' + t.slice(m.index + m[0].length)), puntaje: p };
+      if (p === null || p > TOPE) continue;
+      if (m[2] === '%') {
+        var trozo = m[0].trim();
+        var entreParentesis = /^[(\[]/.test(trozo) && /[)\]]$/.test(trozo);
+        var alFinal = /^[\s.;,:]*$/.test(t.slice(m.index + m[0].length));
+        if (entreParentesis || alFinal) conPorcentaje = m;
+      } else {
+        conPuntos = m;
+      }
     }
+    m = conPuntos || conPorcentaje;
+    if (m) return { criterio: limpiarNombre(t.slice(0, m.index) + ' ' + t.slice(m.index + m[0].length)), puntaje: aNumero(m[1]) };
     var sinNum = t.replace(RE_NUMERACION, '');
     m = RE_AL_FINAL.exec(sinNum);
     if (m) {

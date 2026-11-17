@@ -15,6 +15,8 @@ import pathlib
 import sys
 import threading
 
+sys.dont_write_bytecode = True  # que la prueba no deje __pycache__
+
 import openpyxl
 from playwright.sync_api import sync_playwright
 
@@ -55,6 +57,12 @@ LINEAS = [
     ("Impacto esperado 20 %", "Impacto esperado", 20),
     ("1 | Pertinencia | Coherencia con los objetivos | 30", "Pertinencia · Coherencia con los objetivos", 30),
     ("Objetivo 5: igualdad de género – 10 puntos", "Objetivo 5: igualdad de género", 10),
+    ("Cofinanciación de al menos el 20% del valor total: 10 puntos", "Cofinanciación de al menos el 20% del valor total", 10),
+    ("Contrapartida del 10% en efectivo y 20% en especie – 15 pts", "Contrapartida del 10% en efectivo y 20% en especie", 15),
+    ("Cofinanciación del 20% del valor del proyecto | 10", "Cofinanciación del 20% del valor del proyecto", 10),
+    ("Enfoque de género (15%)", "Enfoque de género", 15),
+    ("Aporte del 30% en especie", "Aporte del 30% en especie", None),
+    ("Costo total del proyecto 10 puntos", "Costo total del proyecto", 10),
     ("Alianzas y cofinanciación", "Alianzas y cofinanciación", None),
     ("Plan de trabajo a 2027", "Plan de trabajo a 2027", None),
 ]
@@ -101,7 +109,7 @@ def main():
             revisar(repr(linea), r and r.get("criterio") == criterio and r.get("puntaje") == puntaje, str(r))
         for linea in ["Criterio | Puntaje máximo", "   ", "30", "Aspecto a evaluar\tPonderación"]:
             revisar(f"se salta {linea!r}", pag.evaluate("l => Criterios.parsearLinea(l)", linea) is None)
-        for linea in ["Total 100 puntos", "TOTAL | 100", "Puntaje total: 100"]:
+        for linea in ["Total 100 puntos", "TOTAL | 100", "Puntaje total: 100", "Puntaje máximo total ........ 100", "Total puntos: 100", "Puntaje máximo total | 100"]:
             r = pag.evaluate("l => Criterios.parsearLinea(l)", linea)
             revisar(f"total en {linea!r}", r == {"total": 100}, str(r))
 
