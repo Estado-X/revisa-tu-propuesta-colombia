@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revisa tu propuesta · Estado X</title>
+<meta name="description" content="Tu propuesta, leída como la lee quien evalúa. Pega los criterios de la convocatoria y arma la matriz criterio por criterio: qué cubre, dónde está la evidencia y qué falta. Todo pasa en tu navegador.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f2ebdc">
+<link rel="canonical" href="https://estado-x.github.io/revisa-tu-propuesta-colombia/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Revisa tu propuesta · Consultorio X de Estado X">
+<meta property="og:url" content="https://estado-x.github.io/revisa-tu-propuesta-colombia/">
+<meta property="og:title" content="Revisa tu propuesta">
+<meta property="og:description" content="Tu propuesta, leída como la lee quien evalúa. Pega los criterios de la convocatoria y arma la matriz criterio por criterio: qué cubre, dónde está la evidencia y qué falta.">
+<meta property="og:image" content="https://estado-x.github.io/revisa-tu-propuesta-colombia/docs/compartir.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Revisa tu propuesta. Herramienta abierta · Consultorio X de Estado X">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Revisa tu propuesta">
+<meta name="twitter:description" content="Tu propuesta, leída como la lee quien evalúa. Pega los criterios de la convocatoria y arma la matriz criterio por criterio.">
+<meta name="twitter:image" content="https://estado-x.github.io/revisa-tu-propuesta-colombia/docs/compartir.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/estilos.css">
+</head>
+<body>
+<a class="saltar" href="#criterios">Ir a pegar los criterios</a>
+
+<header class="cab">
+  <div class="contenedor cab__in">
+    <div class="cab__texto">
+      <p class="kicker">Herramienta abierta · Consultorio X de Estado X</p>
+      <h1>Revisa tu <em>propuesta</em></h1>
+      <p class="bajada">Tu propuesta, leída como la lee quien evalúa. Pega los criterios de la convocatoria y arma la matriz criterio por criterio: qué cubre, dónde está la evidencia y qué falta.</p>
+      <div class="cab__accion">
+        <a class="boton" href="#criterios">Pega los criterios</a>
+        <button class="enlace-fuerte" type="button" id="ejemplo-cab">Mira un ejemplo ficticio</button>
+      </div>
+    </div>
+    <div class="pulso">
+      <dl class="pulso__cifras">
+        <div><dt>Criterios</dt><dd id="n-criterios">–</dd></div>
+        <div><dt>Puntos en total</dt><dd id="n-puntos">–</dd></div>
+      </dl>
+      <p class="pulso__rev"><span class="punto punto--ok" aria-hidden="true"></span><span>Lo que escribes no sale de tu navegador.</span></p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor cuerpo">
+
+    <noscript><p class="aviso aviso--error">Esta página necesita JavaScript para armar la matriz. Todo corre en tu navegador: no se envía nada a ningún servidor.</p></noscript>
+
+    <section class="seccion" id="criterios" aria-labelledby="t-criterios">
+      <div class="seccion__cab">
+        <h2 id="t-criterios"><span class="paso-num" aria-hidden="true">1</span>Pega los criterios</h2>
+        <p class="nota">Cópialos de la tabla de evaluación de los términos de referencia.</p>
+      </div>
+      <div class="pegar">
+        <div class="pegar__campo">
+          <label class="etiqueta" for="pegado">Criterios de evaluación, uno por línea y con su puntaje máximo</label>
+          <textarea id="pegado" rows="9" spellcheck="false" aria-describedby="pegado-ayuda"></textarea>
+          <div class="acciones">
+            <button class="boton" type="button" id="armar">Armar la matriz</button>
+            <button class="boton boton--linea" type="button" id="ejemplo">Cargar un ejemplo ficticio</button>
+            <button class="enlace-boton" type="button" id="borrar">Borrar todo</button>
+          </div>
+          <p class="estado-accion" id="estado-armar" role="status"></p>
+        </div>
+        <div class="pegar__ayuda" id="pegado-ayuda">
+          <p class="etiqueta">Se entiende cualquiera de estas formas</p>
+          <ul class="formas">
+            <li><code>Pertinencia técnica 30 puntos</code></li>
+            <li><code>Sostenibilidad | 15</code></li>
+            <li><code>1. Experiencia del equipo: 20 pts</code></li>
+            <li><code>Metodología (hasta 25 puntos)</code></li>
+          </ul>
+          <p class="nota">También sirve lo que se copia de una tabla de Word, Excel o PDF. Si una línea llega sin puntaje, lo escribes en la matriz.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" id="matriz" aria-labelledby="t-matriz">
+      <div class="seccion__cab">
+        <h2 id="t-matriz" tabindex="-1"><span class="paso-num" aria-hidden="true">2</span>Completa tu matriz</h2>
+        <p class="nota">Corrige lo que haga falta. Los dos últimos campos son opcionales.</p>
+      </div>
+      <p class="aviso aviso--ficticio" id="aviso-ficticio" hidden><strong>Ejemplo ficticio.</strong> La convocatoria, los criterios, las páginas y los anexos son inventados para mostrar cómo funciona. Cámbialos por los de tu convocatoria.</p>
+      <div class="vacio" id="matriz-vacia">
+        <p class="vacio__titulo">Aquí aparece tu matriz, una fila por criterio.</p>
+        <p class="vacio__texto">Pega los criterios arriba y pulsa «Armar la matriz», o empieza con una fila en blanco.</p>
+      </div>
+      <ol class="filas" id="filas"></ol>
+      <div class="matriz__pie">
+        <button class="boton boton--linea" type="button" id="agregar">Agregar un criterio</button>
+        <p class="suma" id="suma" hidden><span class="suma__texto">Suma de los puntajes máximos</span> <strong class="suma__num" id="suma-num">0</strong></p>
+      </div>
+      <p class="aviso aviso--error" id="aviso-suma" role="status" hidden></p>
+    </section>
+
+    <section class="seccion" id="ia" aria-labelledby="t-ia">
+      <div class="seccion__cab">
+        <h2 id="t-ia"><span class="paso-num" aria-hidden="true">3</span>Llévalo a tu IA</h2>
+        <p class="nota">Sirve en Claude, ChatGPT, Gemini o Copilot.</p>
+      </div>
+      <div class="ia">
+        <div class="ia__texto">
+          <label class="etiqueta" for="prompt">El texto que le pide a tu IA leer la propuesta como quien evalúa</label>
+          <textarea id="prompt" rows="14" readonly spellcheck="false" placeholder="Cuando armes la matriz, aquí aparece el texto listo para copiar."></textarea>
+          <div class="acciones">
+            <button class="boton" type="button" id="copiar" disabled>Copiar</button>
+            <p class="estado-accion" id="estado-copiar" role="status"></p>
+          </div>
+        </div>
+        <div class="ia__pasos">
+          <ol class="pasos">
+            <li class="paso"><span class="paso__num" aria-hidden="true">a</span><p>Copia el texto y pégalo en una conversación nueva de tu IA.</p></li>
+            <li class="paso"><span class="paso__num" aria-hidden="true">b</span><p>Adjunta la propuesta (o pégala debajo) y, si puedes, los términos de referencia.</p></li>
+            <li class="paso"><span class="paso__num" aria-hidden="true">c</span><p>Pasa a tu matriz lo que te sirva de la respuesta, y revisa cada cita contra tu documento.</p></li>
+          </ol>
+          <p class="nota nota--caja">La IA no escribe por ti: el texto le pide que no reescriba la propuesta ni invente contenido. Si tu propuesta tiene datos sensibles, <a href="https://estado-x.github.io/tapa-tus-datos-colombia/" target="_blank" rel="noopener">tápalos antes de pegarla</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="dos">
+      <section class="seccion" id="antes" aria-labelledby="t-antes">
+        <div class="seccion__cab">
+          <h2 id="t-antes"><span class="paso-num" aria-hidden="true">4</span>Antes de enviar</h2>
+          <p class="nota" id="antes-cuenta" role="status"></p>
+        </div>
+        <p class="entrada">Los requisitos habilitantes no dan puntos, pero sin ellos nadie lee la propuesta. Marca lo que ya revisaste contra los términos.</p>
+        <ul class="lista" id="lista-antes"></ul>
+      </section>
+
+      <section class="seccion" id="excel" aria-labelledby="t-excel">
+        <div class="seccion__cab">
+          <h2 id="t-excel"><span class="paso-num" aria-hidden="true">5</span>Descarga la matriz</h2>
+        </div>
+        <p class="entrada">Un Excel con una fila por criterio, para trabajarlo con tu equipo.</p>
+        <ul class="columnas" aria-label="Columnas del Excel">
+          <li>Criterio</li>
+          <li>Puntaje máximo</li>
+          <li>Dónde lo cubre (sección/página)</li>
+          <li>Evidencia</li>
+          <li class="columnas__tuya">Qué falta</li>
+          <li class="columnas__tuya">Puntaje estimado</li>
+          <li class="columnas__tuya">Lo que vas a cambiar</li>
+        </ul>
+        <p class="nota">Las tres últimas llegan en blanco: las llenas tú. La lista «Antes de enviar» va en la segunda hoja.</p>
+        <div class="acciones">
+          <button class="boton" type="button" id="descargar" disabled>Descargar en Excel</button>
+          <p class="estado-accion" id="estado-descargar" role="status"></p>
+        </div>
+      </section>
+    </div>
+
+    <div class="dos dos--texto">
+      <section class="seccion limites" aria-labelledby="t-no">
+        <div class="seccion__cab"><h2 id="t-no">Lo que no hace</h2></div>
+        <div class="limites__texto">
+          <p class="limites__uno">No escribe la propuesta, no garantiza un puntaje y no conoce los criterios ocultos de quien evalúa.</p>
+          <p>La página solo ordena los criterios y arma el texto: no lee tu propuesta ni la envía a ninguna parte. La lectura la hace la IA que tú elijas, con sus propias condiciones de uso.</p>
+          <p>Si tu propuesta tiene datos sensibles (nombres, cédulas, salarios, datos de beneficiarios), tápalos antes de pegarla en una IA: <a href="https://estado-x.github.io/tapa-tus-datos-colombia/" target="_blank" rel="noopener">Tapa tus datos</a>.</p>
+        </div>
+      </section>
+
+      <section class="seccion criterio" aria-labelledby="t-criterio">
+        <div class="seccion__cab"><h2 id="t-criterio">Dónde entra tu criterio</h2></div>
+        <div class="limites__texto">
+          <p class="limites__uno">Tú decides qué cambiar. La matriz solo señala.</p>
+          <p>Un puntaje estimado es una pista, no un veredicto. Tú conoces el proyecto, a los aliados y a quien convoca: por eso la última columna del Excel, «Lo que vas a cambiar», la escribes tú.</p>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <section class="hablamos oscuro" aria-labelledby="t-hablamos">
+    <div class="contenedor hablamos__in">
+      <p class="kicker">Consultorio X de Estado X</p>
+      <h2 id="t-hablamos">¿Hablamos de tu caso?</h2>
+      <p>Esta herramienta es una muestra. En Consultorio X montamos con tu equipo el ciclo completo de una convocatoria: buscar, leer los términos de referencia, ordenar aliados, revisar la propuesta contra los criterios y preparar el informe al financiador.</p>
+      <a class="boton boton--claro" href="https://www.linkedin.com/in/juanperezcuervo/" target="_blank" rel="noopener">Escríbeme en LinkedIn</a>
+      <p class="firma">Juan Camilo Pérez Cuervo · Head de Alianzas y Proyectos Estratégicos de Estado X</p>
+    </div>
+  </section>
+</main>
+
+<footer class="pie oscuro">
+  <div class="contenedor pie__in">
+    <p>Hecho por Estado X · licencia MIT · Inspirado en <a href="https://github.com/eseckel/ai-for-grant-writing" target="_blank" rel="noopener">ai-for-grant-writing</a>, de Elizabeth Seckel (licencia CC BY 4.0); no reutiliza su contenido.</p>
+    <p>Los criterios y la propuesta son tuyos: se quedan en tu navegador.</p>
+    <p><a href="https://estadox.com" target="_blank" rel="noopener">estadox.com</a> · Esta página no tiene rastreadores.</p>
+  </div>
+</footer>
+
+<script src="assets/zip.js" defer></script>
+<script src="assets/excel.js" defer></script>
+<script src="assets/criterios.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
